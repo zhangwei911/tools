@@ -3,6 +3,7 @@ package com.viz.tools;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +22,29 @@ public class Toast {
      * @param dur             显示时间
      * @param textColor       文字颜色
      * @param backgroundColor toast背景颜色
+     * @param view            Toast视图
      */
-    public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor) {
+    public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor, View view) {
         // 动态生成布局视图--适用于复杂UI布局
         android.widget.Toast toast = new android.widget.Toast(activity);
         toast.setDuration(dur);
         // 设置重心
         toast.setGravity(Gravity.CENTER, 0, 0);
+        // 设置视图--Toast继承自Widget,不是容器,只能调用设置视图方法
+        toast.setView(view);
+        toast.show();
+    }
+
+    /**
+     * 自定义Toast
+     *
+     * @param activity        调用所在Activity
+     * @param text            toast显示的文字
+     * @param dur             显示时间
+     * @param textColor       文字颜色
+     * @param backgroundColor toast背景颜色
+     */
+    public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor) {
         // 创建inflater
         LinearLayout linearLayout = new LinearLayout(activity);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
@@ -42,9 +59,7 @@ public class Toast {
         textView_toast.setTextColor(textColor);
         textView_toast.setBackgroundColor(backgroundColor);
         linearLayout.addView(textView_toast);
-        // 设置视图--Toast继承自Widget,不是容器,只能调用设置视图方法
-        toast.setView(linearLayout);
-        toast.show();
+        show(activity, text, dur, textColor, backgroundColor, linearLayout);
     }
 
     /**
