@@ -12,18 +12,22 @@ public class StringContain {
      * @param isEquals    是否完全匹配
      * @return 是否找到
      */
-    public static boolean arryContains(String[] stringArray, String source, boolean isEquals) {
-        if (stringArray != null) {
+    public static boolean arryContains(String[] stringArray, String source, boolean isEquals,int index) {
+        if (stringArray != null&&!TextUtils.isEmpty(source)) {
+            int i = 0 ;
             for (String str : stringArray) {
                 if (isEquals) {
                     if (str.equals(source)) {
+                        index = i;
                         return true;
                     }
                 } else {
                     if (str.contains(source)) {
+                        index = i;
                         return true;
                     }
                 }
+                i++;
             }
         }
         return false;
