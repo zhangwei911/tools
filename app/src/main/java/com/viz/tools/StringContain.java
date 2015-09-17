@@ -4,6 +4,7 @@ package com.viz.tools;
  * Created by wellchang in project tools on 10/01/15 16:21.
  */
 public class StringContain {
+    public static int index;
     /**
      * 判断某个字符串是否存在于数组中
      *
@@ -12,7 +13,7 @@ public class StringContain {
      * @param isEquals    是否完全匹配
      * @return 是否找到
      */
-    public static boolean arryContains(String[] stringArray, String source, boolean isEquals,int index) {
+    public static boolean arryContains(String[] stringArray, String source, boolean isEquals) {
         if (stringArray != null&&!TextUtils.isEmpty(source)) {
             int i = 0 ;
             for (String str : stringArray) {
