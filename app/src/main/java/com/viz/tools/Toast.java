@@ -13,6 +13,7 @@ import android.widget.TextView;
  */
 public class Toast {
     private static TextView textView_toast;
+    private static android.widget.Toast toast = null;
 
     /**
      * 自定义Toast
@@ -25,8 +26,12 @@ public class Toast {
      * @param view            Toast视图
      */
     public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor, View view) {
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
         // 动态生成布局视图--适用于复杂UI布局
-        android.widget.Toast toast = new android.widget.Toast(activity);
+        toast = new android.widget.Toast(activity);
         toast.setDuration(dur);
         // 设置重心
         toast.setGravity(Gravity.CENTER, 0, 0);
