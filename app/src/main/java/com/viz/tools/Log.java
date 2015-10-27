@@ -63,7 +63,7 @@ public class Log {
         log(allowV,saveV,null,msg,LOG_TYPE.V);
     }
 
-    public static void v(String msg, Object... args) {
+    public static void vf(String msg, Object... args) {
         log(allowV,saveV,null,String.format(msg, args),LOG_TYPE.V);
     }
 
@@ -95,7 +95,7 @@ public class Log {
         log(allowD,saveD,null,msg,LOG_TYPE.D);
     }
 
-    public static void d(String msg, Object... args) {
+    public static void df(String msg, Object... args) {
         log(allowD,saveD,null,String.format(msg, args),LOG_TYPE.D);
     }
 
@@ -127,7 +127,7 @@ public class Log {
         log(allowI,saveI,null,msg,LOG_TYPE.I);
     }
 
-    public static void i(String msg, Object... args) {
+    public static void ifo(String msg, Object... args) {
         log(allowI,saveI,null,String.format(msg, args),LOG_TYPE.I);
     }
 
@@ -159,7 +159,7 @@ public class Log {
         log(allowW,saveW,null,msg,LOG_TYPE.W);
     }
 
-    public static void w(String msg, Object... args) {
+    public static void wf(String msg, Object... args) {
         log(allowW,saveW,null,String.format(msg, args),LOG_TYPE.W);
     }
 
@@ -191,7 +191,7 @@ public class Log {
         log(allowE,saveE,null,msg,LOG_TYPE.E);
     }
 
-    public static void e(String msg, Object... args) {
+    public static void ef(String msg, Object... args) {
         log(allowE,saveE,null,String.format(msg, args),LOG_TYPE.E);
     }
 
