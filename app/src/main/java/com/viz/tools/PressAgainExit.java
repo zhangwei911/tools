@@ -14,8 +14,19 @@ public class PressAgainExit {
      * 再按一次退出程序。
      */
     public static void pressAgainExit(Context context) {
+        pressAgainExit(context,false);
+    }
+    
+    /**
+     * 再按一次退出程序。
+     */
+    public static void pressAgainExit(Context context,boolean isKillProcess) {
         if (exit.isExit()) {
-            ((Activity)context).finish();
+            if(isKillProcess){
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }else{
+                ((Activity)context).finish();
+            }
         } else {
             Toast.showShort(context, "再按一次退出程序");
             exit.doExitInOneSecond();
