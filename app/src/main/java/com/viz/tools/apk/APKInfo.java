@@ -9,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import com.viz.tools.Log;
 
@@ -119,10 +120,25 @@ public class APKInfo {
      * @param packageName 另外一个应用程序的包名
      * @param Activity    要启动的Activity
      */
-    public static void startOtherActivity(Context context, String packageName, String Activity) {
-        ComponentName componetName = new ComponentName(packageName, Activity);
+    public static void startOtherActivity(Context context, String packageName, String activity) {
+        startOtherActivity(context,packageName,activity);
+    }
+
+    /**
+     * 这些代码是启动另外的一个应用程序的主Activity，当然也可以启动任意一个Activity
+     *
+     * @param context
+     * @param packageName 另外一个应用程序的包名
+     * @param activity    要启动的Activity
+     * @param bundle 传递的数据
+     */
+    public static void startOtherActivity(Context context, String packageName, String activity, Bundle bundle) {
+        ComponentName componetName = new ComponentName(packageName, activity);
         try {
             Intent intent = new Intent();
+            if(bundle!=null) {
+                intent.putExtras(bundle);
+            }
             intent.setComponent(componetName);
             context.startActivity(intent);
         } catch (Exception e) {
