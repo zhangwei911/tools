@@ -48,12 +48,13 @@ public class Toast {
      * @param dur             显示时间
      * @param textColor       文字颜色
      * @param backgroundColor toast背景颜色
+     * @param gravity toast位置（Gravity.TOP|Gravity.CENTER|Gravity.BOTTOM）
      */
-    public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor) {
+    public static void show(Activity activity, String text, int dur, int textColor, int backgroundColor,int gravity) {
         // 创建inflater
         LinearLayout linearLayout = new LinearLayout(activity);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
-        params.gravity = Gravity.CENTER;
+        params.gravity = gravity;
         linearLayout.setLayoutParams(params);
         textView_toast = new TextView(activity);
         textView_toast.setText(text);
@@ -74,8 +75,8 @@ public class Toast {
      * @param text     toast显示的文字
      * @param dur      显示时间
      */
-    public static void show(Activity activity, String text, int dur) {
-        show(activity, text, dur, 0xffffffff, 0xb2000000);
+    public static void show(Activity activity, Object text, int dur) {
+        show(activity, TextUtils.getText(activity,text), dur, 0xffffffff, 0xb2000000,Gravity.CENTER);
     }
 
     /**
@@ -84,7 +85,7 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void show(Activity activity, String text) {
+    public static void show(Activity activity, Object text) {
         show(activity, text, 1000);
     }
 
@@ -94,7 +95,7 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void showShort(Activity activity, String text) {
+    public static void showShort(Activity activity, Object text) {
         show(activity, text, android.widget.Toast.LENGTH_SHORT);
     }
 
@@ -104,7 +105,7 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void showLong(Activity activity, String text) {
+    public static void showLong(Activity activity, Object text) {
         show(activity, text, android.widget.Toast.LENGTH_LONG);
     }
 
@@ -114,7 +115,7 @@ public class Toast {
      * @param context 调用所在Context
      * @param text    Toast提示内容
      */
-    public static void show(Context context, String text) {
+    public static void show(Context context, Object text) {
         show((Activity) context, text);
     }
 
@@ -124,7 +125,7 @@ public class Toast {
      * @param context 调用所在Context
      * @param text    Toast提示内容
      */
-    public static void showShort(Context context, String text) {
+    public static void showShort(Context context, Object text) {
         showShort((Activity) context, text);
     }
 
@@ -134,7 +135,7 @@ public class Toast {
      * @param context 调用所在Context
      * @param text    Toast提示内容
      */
-    public static void showLong(Context context, String text) {
+    public static void showLong(Context context, Object text) {
         showLong((Activity) context, text);
     }
 
@@ -205,8 +206,8 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void showAny(Activity activity, String text, Object... args) {
-        show(activity, String.format(text, args), 1000);
+    public static void showAny(Activity activity, Object text, Object... args) {
+        show(activity, String.format(TextUtils.getText(activity,text), args), 1000);
     }
 
     /**
@@ -215,8 +216,8 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void showAnyShort(Activity activity, String text, Object... args) {
-        show(activity, String.format(text, args), android.widget.Toast.LENGTH_SHORT);
+    public static void showAnyShort(Activity activity, Object text, Object... args) {
+        show(activity, String.format(TextUtils.getText(activity,text), args), android.widget.Toast.LENGTH_SHORT);
     }
 
     /**
@@ -225,7 +226,8 @@ public class Toast {
      * @param activity 调用所在Activity
      * @param text     Toast提示内容
      */
-    public static void showAnyLong(Activity activity, String text, Object... args) {
-        show(activity, String.format(text, args), android.widget.Toast.LENGTH_LONG);
+    public static void showAnyLong(Activity activity, Object text, Object... args) {
+        show(activity, String.format(TextUtils.getText(activity,text), args), android.widget.Toast.LENGTH_LONG);
     }
+
 }

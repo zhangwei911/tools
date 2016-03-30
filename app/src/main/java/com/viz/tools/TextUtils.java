@@ -1,5 +1,7 @@
 package com.viz.tools;
 
+import android.content.Context;
+
 /**
  * Created by swtf in project tools on 15-1-13 09:31 .
  */
@@ -16,5 +18,19 @@ public class TextUtils {
         } else {
             return false;
         }
+    }
+
+    public static String getText(Context context,Object text){
+        String t;
+        try{
+            if(text instanceof Integer) {
+                t = context.getString((Integer) text);
+            }else{
+                t = text.toString();
+            }
+        }catch (Exception e){
+            t = text.toString();
+        }
+        return t;
     }
 }
