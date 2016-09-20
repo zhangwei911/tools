@@ -24,6 +24,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.lang.Math;
 
 /**
  * Wrapper API for sending log output.
@@ -302,28 +303,63 @@ public class Log {
 
     private static void log(boolean isAllow,boolean isSave, String tag, Object log, LOG_TYPE log_type) {
         String logMsg = buildMessage(ObjectToString(log), isSave);
+        if(logMsg == null) {
+            logMsg = "null";
+        }
+
         if (tag == null) {
             tag = TAG;
         }
-        if (isAllow && isPrint(logMsg)) {
-            switch (log_type) {
-                case V:
-                    android.util.Log.v(tag, logMsg);
-                    break;
-                case D:
-                    android.util.Log.d(tag, logMsg);
-                    break;
-                case I:
-                    android.util.Log.i(tag, logMsg);
-                    break;
-                case W:
-                    android.util.Log.w(tag, logMsg);
-                    break;
-                case E:
-                    android.util.Log.e(tag, logMsg);
-                    break;
+
+        if(isAllow && isPrint(logMsg)) {
+            logSplit(tag,logMsg,log_type);
+        }
+    }
+
+    private static void logSplit(String tag, String logMsg, LOG_TYPE log_type){
+        final int logLen = logMsg.length();
+        final int splitLen = 1024;
+        final int logcount = Integer.parseInt((Math.ceil((double)(logLen / splitLen)) + "").substring(0, (Math.ceil((double)(logLen / splitLen)) + "").indexOf(".")));
+        if(logLen > splitLen) {
+            for(int i = 0; i < logcount; ++i) {
+                if(i == logcount - 1) {
+                    logOriginal(tag, logMsg.substring(i * splitLen, logLen),log_type);
+                } else {
+                    logOriginal(tag, logMsg.substring(i * splitLen, (i + 1) * splitLen),log_type);
+                }
             }
-            TAG = "MyApplication";
+        } else {
+            logOriginal(tag, logMsg, log_type);
+        }
+    }
+
+    private static void logOriginal(String tag, String msg, LOG_TYPE log_type){
+        switch (log_type){
+            case V:
+            {
+                android.util.Log.v(tag,msg);
+                break;
+            }
+            case D:
+            {
+                android.util.Log.d(tag,msg);
+                break;
+            }
+            case I:
+            {
+                android.util.Log.i(tag,msg);
+                break;
+            }
+            case W:
+            {
+                android.util.Log.w(tag,msg);
+                break;
+            }
+            case E:
+            {
+                android.util.Log.e(tag,msg);
+                break;
+            }
         }
     }
 
