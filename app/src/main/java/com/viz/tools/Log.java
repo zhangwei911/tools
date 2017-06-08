@@ -15,8 +15,11 @@ package com.viz.tools;
  * limitations under the License.
  */
 
+import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
+
+import com.viz.tools.apk.StringUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -51,7 +54,15 @@ public class Log {
     // 存放日志文件的目录全路径
     public static String m_strLogFolderPath = "";
 
+    private static Context context = null;
+
+    private static final String SUFFIX = ".java";
+
     public Log() {
+    }
+
+    public static void init(Context context){
+        Log.context = context;
     }
 //============================V=======================
 
@@ -83,6 +94,22 @@ public class Log {
 
     public static void v() {
         log(allowV,saveV,null,"",LOG_TYPE.V);
+    }
+
+    public static void vj(String json) {
+        vj(null,json);
+    }
+
+    public static void vj(String tag,String json) {
+        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    }
+
+    public static void vj(String json, String msg, Object... args) {
+        vj(null, formatJson(json,msg,args));
+    }
+
+    public static void vj(String tag, String json, String msg, Object... args) {
+        vj(tag, formatJson(json,msg,args));
     }
 
     //============================D=======================
@@ -117,6 +144,22 @@ public class Log {
         log(allowD,saveD,null,"",LOG_TYPE.D);
     }
 
+    public static void dj(String json) {
+        dj(null,json);
+    }
+
+    public static void dj(String tag,String json) {
+        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    }
+
+    public static void dj(String json, String msg, Object... args) {
+        dj(null, formatJson(json,msg,args));
+    }
+
+    public static void dj(String tag, String json, String msg, Object... args) {
+        dj(tag, formatJson(json,msg,args));
+    }
+
     //============================I=======================
 
     /**
@@ -147,6 +190,22 @@ public class Log {
 
     public static void i() {
         log(allowI,saveI,null,"",LOG_TYPE.I);
+    }
+
+    public static void ij(String json) {
+        ij(null,json);
+    }
+
+    public static void ij(String tag,String json) {
+        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    }
+
+    public static void ij(String json, String msg, Object... args) {
+        ij(null, formatJson(json,msg,args));
+    }
+
+    public static void ij(String tag, String json, String msg, Object... args) {
+        ij(tag, formatJson(json,msg,args));
     }
 
     //============================W=======================
@@ -181,6 +240,22 @@ public class Log {
         log(allowW,saveW,null,"",LOG_TYPE.W);
     }
 
+    public static void wj(String json) {
+        wj(null,json);
+    }
+
+    public static void wj(String tag,String json) {
+        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    }
+
+    public static void wj(String json, String msg, Object... args) {
+        wj(null, formatJson(json,msg,args));
+    }
+
+    public static void wj(String tag, String json, String msg, Object... args) {
+        wj(tag, formatJson(json,msg,args));
+    }
+
     //============================E=======================
 
     /**
@@ -213,6 +288,22 @@ public class Log {
         log(allowE,saveE,null,"",LOG_TYPE.E);
     }
 
+    public static void ej(String json) {
+        ej(null,json);
+    }
+
+    public static void ej(String tag,String json) {
+        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    }
+
+    public static void ej(String json, String msg, Object... args) {
+        ej(null, formatJson(json,msg,args));
+    }
+
+    public static void ej(String tag, String json, String msg, Object... args) {
+        ej(tag, formatJson(json,msg,args));
+    }
+
     /**
      * Handy function to get a loggable stack trace from a Throwable
      *
@@ -234,6 +325,16 @@ public class Log {
             return null;
         }
         for (StackTraceElement st : sts) {
+            //String cn = st.getClassName();
+            //String[] cni = cn.split("\\.");
+            //if (cni.length > 0) {
+            //    cn = cni[cni.length - 1] + SUFFIX;
+            //}
+            //
+            //if (cn.contains("$")) {
+            //    cn = cn.split("\\$")[0] + SUFFIX;
+            //}
+            //System.out.println("Log.buildMessage " + st.getClassName() + "(" + cn + ":" + st.getLineNumber() + ")");
             if (st.isNativeMethod()) {
                 continue;
             }
@@ -246,15 +347,27 @@ public class Log {
             if (st.getMethodName().equals("Log")) {
                 continue;
             }
+
+            String className = st.getClassName();
+            String[] classNameInfo = className.split("\\.");
+            if (classNameInfo.length > 0) {
+                className = classNameInfo[classNameInfo.length - 1] + SUFFIX;
+            }
+
+            if (className.contains("$")) {
+                className = className.split("\\$")[0] + SUFFIX;
+            }
+
             String logMsg = new StringBuilder()
                     .append(TextUtils.isEmpty(AUTHOR) ? "" : "@" + AUTHOR + " ")
-                    .append("[")
-                    .append(st.getLineNumber())
-                    .append("]")
                     .append(st.getClassName())
                     .append(".")
                     .append(st.getMethodName())
-                    .append("()")
+                    .append("(")
+                    .append(className)
+                    .append(":")
+                    .append(st.getLineNumber())
+                    .append(")")
                     .append(isEmpty(ObjectToString(msg)) ? "" : ": ")
                     .append(ObjectToString(msg)).toString();
             save(isSave, logMsg);
@@ -308,7 +421,11 @@ public class Log {
         }
 
         if (tag == null) {
-            tag = TAG;
+            if(context == null){
+                tag = TAG;
+            }else{
+                tag = context.getPackageName();
+            }
         }
 
         if(isAllow && isPrint(logMsg)) {
@@ -408,7 +525,7 @@ public class Log {
             // 得到当前日期时间的指定格式字符串
             String strDateTimeFileName = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-            File fileLogFilePath = new File(m_strLogFolderPath, strDateTimeFileName + ".log");
+            File fileLogFilePath = new File(m_strLogFolderPath, strDateTimeFileName + (context == null ? "" : context.getPackageName()) + ".log");
             // 如果日志文件不存在，则创建它
             if (true != fileLogFilePath.exists()) {
                 try {
@@ -477,5 +594,13 @@ public class Log {
 
     public static String ObjectToString(Object msg) {
         return msg.toString();
+    }
+
+    private static String formatJson(String json,String msg,Object... args){
+        return String.format(msg,args) + "\n" + StringUtils.format(StringUtils.convertUnicode(json));
+    }
+
+    private static String formatJson(String json){
+        return StringUtils.format(StringUtils.convertUnicode(json));
     }
 }

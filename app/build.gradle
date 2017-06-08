@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "23.0.0"
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         minSdkVersion 11
@@ -22,3 +22,50 @@ dependencies {
     compile files('libs/jsoup-1.8.1-sources.jar')
     compile files('libs/jsoup-1.8.1.jar')
 }
+
+build.doLast {
+        copy {
+            println 'copy build'
+            from('build/intermediates/bundles/debug')
+            into('build/outputs/')
+            include('classes.jar')
+        }
+    }
+
+build.doFirst{
+    println 'doFirst'
+}
+
+task testPreBuild << {
+    println 'before preBuild'
+}
+
+preBuild.dependsOn testPreBuild
+
+preBuild.doFirst{
+    println 'preBuild doFirst'
+}
+
+assembleDebug.doLast{
+    copy {
+        println 'copy assembleDebug'
+        from('build/intermediates/bundles/debug/classes.jar')
+        into('build/outputs/')
+        rename{
+            'tools.jar'
+        }
+    }
+}
+
+////打jar包
+//def SDK_BASENAME = "tools_V1.0";
+//def sdkJarPath = "build";
+//def zipFile = file('build/intermediates/bundles/release/classes.jar')
+//
+//task makeJar(type: Jar) {
+//    from zipTree(zipFile)
+//    from fileTree(dir: 'src/main', includes: ['assets/**'])
+//    baseName = SDK_BASENAME
+//    destinationDir = file(sdkJarPath)
+//}
+//makeJar.dependsOn(build)
