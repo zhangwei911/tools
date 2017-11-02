@@ -45,17 +45,17 @@ public class NetWorkCheck {
     public static void checkNetwork(final Context context) {
         if (!isNetworkAvailable(context)) {
             TextView msg = new TextView(context);
-            msg.setText(R.string.set_desc);
+            msg.setText("没有连接网络，请设置！");
             new AlertDialog.Builder(context).setIcon(android.R.drawable.stat_sys_warning)//set the icon of the AlertDialog
-                    .setTitle(R.string.nonetwork)//set the title of the AlertDialog
+                    .setTitle("离线")//set the title of the AlertDialog
                     .setView(msg)//set the view(layout) of the AlertDialog content
-                    .setPositiveButton(R.string.network_set, new DialogInterface.OnClickListener() {
+                    .setPositiveButton("设置网络", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             context.startActivity(new Intent(Settings.ACTION_SETTINGS));
                         }
                     })//set the ok button and ClickListener
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    .setNegativeButton("取    消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();

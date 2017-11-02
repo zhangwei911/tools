@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 11
@@ -46,7 +46,7 @@ preBuild.doFirst{
     println 'preBuild doFirst'
 }
 
-assembleDebug.doLast{
+build.doLast{
     copy {
         println 'copy assembleDebug'
         from('build/intermediates/bundles/debug/classes.jar')

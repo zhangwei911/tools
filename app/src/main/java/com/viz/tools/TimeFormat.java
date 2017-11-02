@@ -5,12 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import android.text.TextUtils;
 
 /**
  * Created by viz on 2014/11/25.
  */
 public class TimeFormat {
     public static final String TIMEZONE_SHANGHAI = "Asia/Shanghai";
+    public static final String TIMEFORAMT = "yyyy/MM/dd HH:mm:ss";
 
     /**
      * 将字符串数据转化为毫秒数
@@ -75,6 +77,22 @@ public class TimeFormat {
             e.printStackTrace();
             return dateTime;
         }
+    }
+
+    public static String getCurrentTime(){
+        return getDateFormatTime(System.currentTimeMillis()+"",TIMEFORAMT);
+    }
+
+    public static String getCurrentTime(String timeFormat){
+        return getDateFormatTime(System.currentTimeMillis()+"",timeFormat);
+    }
+
+    public static String getCurrentTimeTimeZone(String timeFormat,String timeZone){
+        return getDateFormatTime(System.currentTimeMillis()+"",timeFormat,timeZone);
+    }
+
+    public static String getCurrentTimeTimeZone(String timeZone){
+        return getDateFormatTime(System.currentTimeMillis()+"",TIMEFORAMT,timeZone);
     }
 
     public static void main(String[] args) {
