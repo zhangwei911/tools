@@ -115,7 +115,7 @@ public class TimeFormat {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             System.out.println("毫秒数转化后的时间为：" + sdf.format(Long.parseLong(sstime)));
-        } catch (java.text.ParseException e) {
+        } catch (ParseException e) {
 // TODO Auto-generated catch block
             e.printStackTrace();
         }

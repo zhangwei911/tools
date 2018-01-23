@@ -470,7 +470,7 @@ public class FileUtils {
      *         <ul>
      *         <li>if {@link FileUtils#getFolderName(String)} return null, return false</li>
      *         <li>if target directory already exists, return true</li>
-     *         <li>return {@link java.io.File#makeFolder}</li>
+     *         <li>return {@link File#makeFolder}</li>
      *         </ul>
      */
     public static boolean makeDirs(String filePath) {

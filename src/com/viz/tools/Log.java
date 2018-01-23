@@ -56,7 +56,7 @@ public class Log {
 
     private static Context context = null;
 
-    private static final String SUFFIX = ".java";
+    public static String SUFFIX = ".java";
 
     public Log() {
     }
@@ -76,7 +76,11 @@ public class Log {
     }
 
     public static void vf(String msg, Object... args) {
-        log(allowV,saveV,null,String.format(msg, args),LOG_TYPE.V);
+        log(allowV,saveV,null,format(msg, args),LOG_TYPE.V);
+    }
+
+    public static void vf(Object... args) {
+        log(allowV,saveV,null,format(null, args),LOG_TYPE.V);
     }
 
     /**
@@ -124,7 +128,11 @@ public class Log {
     }
 
     public static void df(String msg, Object... args) {
-        log(allowD,saveD,null,String.format(msg, args),LOG_TYPE.D);
+        log(allowD,saveD,null,format(msg, args),LOG_TYPE.D);
+    }
+
+    public static void df(Object... args) {
+        log(allowD,saveD,null,format(null, args),LOG_TYPE.D);
     }
 
     /**
@@ -172,7 +180,11 @@ public class Log {
     }
 
     public static void ifo(String msg, Object... args) {
-        log(allowI,saveI,null,String.format(msg, args),LOG_TYPE.I);
+        log(allowI,saveI,null,format(msg, args),LOG_TYPE.I);
+    }
+
+    public static void ifo(Object... args) {
+        log(allowI,saveI,null,format(null, args),LOG_TYPE.I);
     }
 
     /**
@@ -220,7 +232,11 @@ public class Log {
     }
 
     public static void wf(String msg, Object... args) {
-        log(allowW,saveW,null,String.format(msg, args),LOG_TYPE.W);
+        log(allowW,saveW,null,format(msg, args),LOG_TYPE.W);
+    }
+
+    public static void wf(Object... args) {
+        log(allowW,saveW,null,format(null, args),LOG_TYPE.W);
     }
 
     /**
@@ -268,7 +284,11 @@ public class Log {
     }
 
     public static void ef(String msg, Object... args) {
-        log(allowE,saveE,null,String.format(msg, args),LOG_TYPE.E);
+        log(allowE,saveE,null,format(msg, args),LOG_TYPE.E);
+    }
+
+    public static void ef(Object... args) {
+        log(allowE,saveE,null,format(null, args),LOG_TYPE.E);
     }
 
     /**
@@ -602,5 +622,18 @@ public class Log {
 
     private static String formatJson(String json){
         return StringUtils.format(StringUtils.convertUnicode(json));
+    }
+
+    private static String format(String msg,Object... args){
+        if(msg == null) {
+            StringBuilder msgBuilder = new StringBuilder();
+            for (Object obj : args) {
+                msgBuilder.append(obj.toString()).append(" ");
+            }
+            msg = msgBuilder.toString();
+            return msg;
+        }else {
+            return String.format(msg, args);
+        }
     }
 }
