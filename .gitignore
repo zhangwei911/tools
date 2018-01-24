@@ -35,3 +35,5 @@ proguard/
 .idea/
 
 import-summary.txt
+
+*.iml

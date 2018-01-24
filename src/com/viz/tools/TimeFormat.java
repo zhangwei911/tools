@@ -3,7 +3,6 @@ package com.viz.tools;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 import android.text.TextUtils;
 
@@ -42,15 +41,26 @@ public class TimeFormat {
      * @param dateTimeFormat 时间格式
      * @return 格式化时间
      */
-    public static String getDateFormatTime(String msTime, String dateTimeFormat) {
+    public static String getDateFormatTime(Object msTime, String dateTimeFormat) {
         return getDateFormatTime(msTime, dateTimeFormat, null);
     }
 
-    public static String getDateFormatTime(String msTime, String dateTimeFormat, String timeZone) {
+    public static String getDateFormatTime(Object msTime, String dateTimeFormat, String timeZone) {
         SimpleDateFormat sdf = new SimpleDateFormat(dateTimeFormat);
         TimeZone tz = TextUtils.isEmpty(timeZone) ? TimeZone.getDefault() : TimeZone.getTimeZone(timeZone);
         sdf.setTimeZone(tz);
-        return sdf.format(Long.parseLong(msTime));
+        if(msTime instanceof Long){
+            return sdf.format(msTime);
+        }else if(msTime instanceof String){
+            return sdf.format(Long.parseLong(msTime.toString()));
+        }else{
+            try {
+                throw new Exception(msTime.getClass().getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**
