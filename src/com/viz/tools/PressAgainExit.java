@@ -9,28 +9,47 @@ import android.os.HandlerThread;
  * Created by viz on 2014/10/29.
  */
 public class PressAgainExit {
-    private static Exit exit =new Exit();
+    public interface OnPressAgainExitListener {
+        void onTips();
+        void onExit();
+    }
+
+    private static OnPressAgainExitListener onPressAgainExitListener = null;
+    private static Exit exit = new Exit();
+
     /**
      * 再按一次退出程序。
      */
     public static void pressAgainExit(Context context) {
-        pressAgainExit(context,false);
+        pressAgainExit(context, false);
     }
-    
+
     /**
      * 再按一次退出程序。
      */
-    public static void pressAgainExit(Context context,boolean isKillProcess) {
+    public static void pressAgainExit(Context context, boolean isKillProcess) {
         if (exit.isExit()) {
-            if(isKillProcess){
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }else{
-                ((Activity)context).finish();
+            if (onPressAgainExitListener == null) {
+                if (isKillProcess) {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                } else {
+                    ((Activity) context).finish();
+                }
+            } else {
+                onPressAgainExitListener.onExit();
             }
         } else {
-            Toast.showShort(context, "再按一次退出程序");
+            if (onPressAgainExitListener == null) {
+                Toast.showShort(context, "再按一次退出程序");
+            } else {
+                onPressAgainExitListener.onTips();
+            }
             exit.doExitInOneSecond();
         }
+    }
+
+    public static void setOnPressAgainExitListener(OnPressAgainExitListener onPressAgainExitListener) {
+        PressAgainExit.onPressAgainExitListener = onPressAgainExitListener;
     }
 
 

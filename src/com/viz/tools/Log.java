@@ -61,7 +61,7 @@ public class Log {
     public Log() {
     }
 
-    public static void init(Context context){
+    public static void init(Context context) {
         Log.context = context;
     }
 //============================V=======================
@@ -72,15 +72,15 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void v(Object msg) {
-        log(allowV,saveV,null,msg,LOG_TYPE.V);
+        log(allowV, saveV, null, msg, LOG_TYPE.V);
     }
 
     public static void vf(String msg, Object... args) {
-        log(allowV,saveV,null,format(msg, args),LOG_TYPE.V);
+        log(allowV, saveV, null, format(msg, args), LOG_TYPE.V);
     }
 
     public static void vf(Object... args) {
-        log(allowV,saveV,null,format(null, args),LOG_TYPE.V);
+        log(allowV, saveV, null, format(null, args), LOG_TYPE.V);
     }
 
     /**
@@ -89,31 +89,31 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void v(String tag, Object msg) {
-        log(allowV,saveV,tag,msg,LOG_TYPE.V);
+        log(allowV, saveV, tag, msg, LOG_TYPE.V);
     }
 
     public static void v(String tag, String msg, Object... args) {
-        log(allowV,saveV,tag,String.format(msg, args),LOG_TYPE.V);
+        log(allowV, saveV, tag, String.format(msg, args), LOG_TYPE.V);
     }
 
     public static void v() {
-        log(allowV,saveV,null,"",LOG_TYPE.V);
+        log(allowV, saveV, null, "", LOG_TYPE.V);
     }
 
     public static void vj(String json) {
-        vj(null,json);
+        vj(null, json);
     }
 
-    public static void vj(String tag,String json) {
-        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    public static void vj(String tag, String json) {
+        log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
     public static void vj(String json, String msg, Object... args) {
-        vj(null, formatJson(json,msg,args));
+        vj(null, formatJson(json, msg, args));
     }
 
     public static void vj(String tag, String json, String msg, Object... args) {
-        vj(tag, formatJson(json,msg,args));
+        vj(tag, formatJson(json, msg, args));
     }
 
     //============================D=======================
@@ -124,15 +124,15 @@ public class Log {
      * @param msg
      */
     public static void d(Object msg) {
-        log(allowD,saveD,null,msg,LOG_TYPE.D);
+        log(allowD, saveD, null, msg, LOG_TYPE.D);
     }
 
     public static void df(String msg, Object... args) {
-        log(allowD,saveD,null,format(msg, args),LOG_TYPE.D);
+        log(allowD, saveD, null, format(msg, args), LOG_TYPE.D);
     }
 
     public static void df(Object... args) {
-        log(allowD,saveD,null,format(null, args),LOG_TYPE.D);
+        log(allowD, saveD, null, format(null, args), LOG_TYPE.D);
     }
 
     /**
@@ -141,31 +141,35 @@ public class Log {
      * @param msg
      */
     public static void d(String tag, Object msg) {
-        log(allowD,saveD,tag,msg,LOG_TYPE.D);
+        log(allowD, saveD, tag, msg, LOG_TYPE.D);
     }
 
     public static void d(String tag, String msg, Object... args) {
-        log(allowD,saveD,tag,String.format(msg, args),LOG_TYPE.D);
+        if(args.length == 0){
+            d(tag,msg);
+            return;
+        }
+        log(allowD, saveD, tag, String.format(msg, args), LOG_TYPE.D);
     }
 
     public static void d() {
-        log(allowD,saveD,null,"",LOG_TYPE.D);
+        log(allowD, saveD, null, "", LOG_TYPE.D);
     }
 
     public static void dj(String json) {
-        dj(null,json);
+        dj(null, json);
     }
 
-    public static void dj(String tag,String json) {
-        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    public static void dj(String tag, String json) {
+        log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
     public static void dj(String json, String msg, Object... args) {
-        dj(null, formatJson(json,msg,args));
+        dj(null, formatJson(json, msg, args));
     }
 
     public static void dj(String tag, String json, String msg, Object... args) {
-        dj(tag, formatJson(json,msg,args));
+        dj(tag, formatJson(json, msg, args));
     }
 
     //============================I=======================
@@ -176,15 +180,15 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void i(Object msg) {
-        log(allowI,saveI,null,msg,LOG_TYPE.I);
+        log(allowI, saveI, null, msg, LOG_TYPE.I);
     }
 
     public static void ifo(String msg, Object... args) {
-        log(allowI,saveI,null,format(msg, args),LOG_TYPE.I);
+        log(allowI, saveI, null, format(msg, args), LOG_TYPE.I);
     }
 
     public static void ifo(Object... args) {
-        log(allowI,saveI,null,format(null, args),LOG_TYPE.I);
+        log(allowI, saveI, null, format(null, args), LOG_TYPE.I);
     }
 
     /**
@@ -193,31 +197,31 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void i(String tag, Object msg) {
-        log(allowI,saveI,tag,msg,LOG_TYPE.I);
+        log(allowI, saveI, tag, msg, LOG_TYPE.I);
     }
 
     public static void i(String tag, String msg, Object... args) {
-        log(allowI,saveI,tag,String.format(msg, args),LOG_TYPE.I);
+        log(allowI, saveI, tag, String.format(msg, args), LOG_TYPE.I);
     }
 
     public static void i() {
-        log(allowI,saveI,null,"",LOG_TYPE.I);
+        log(allowI, saveI, null, "", LOG_TYPE.I);
     }
 
     public static void ij(String json) {
-        ij(null,json);
+        ij(null, json);
     }
 
-    public static void ij(String tag,String json) {
-        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    public static void ij(String tag, String json) {
+        log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
     public static void ij(String json, String msg, Object... args) {
-        ij(null, formatJson(json,msg,args));
+        ij(null, formatJson(json, msg, args));
     }
 
     public static void ij(String tag, String json, String msg, Object... args) {
-        ij(tag, formatJson(json,msg,args));
+        ij(tag, formatJson(json, msg, args));
     }
 
     //============================W=======================
@@ -228,15 +232,15 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void w(Object msg) {
-        log(allowW,saveW,null,msg,LOG_TYPE.W);
+        log(allowW, saveW, null, msg, LOG_TYPE.W);
     }
 
     public static void wf(String msg, Object... args) {
-        log(allowW,saveW,null,format(msg, args),LOG_TYPE.W);
+        log(allowW, saveW, null, format(msg, args), LOG_TYPE.W);
     }
 
     public static void wf(Object... args) {
-        log(allowW,saveW,null,format(null, args),LOG_TYPE.W);
+        log(allowW, saveW, null, format(null, args), LOG_TYPE.W);
     }
 
     /**
@@ -245,31 +249,31 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void w(String tag, Object msg) {
-        log(allowW,saveW,tag,msg,LOG_TYPE.W);
+        log(allowW, saveW, tag, msg, LOG_TYPE.W);
     }
 
     public static void w(String tag, String msg, Object... args) {
-        log(allowW,saveW,tag,String.format(msg, args),LOG_TYPE.W);
+        log(allowW, saveW, tag, String.format(msg, args), LOG_TYPE.W);
     }
 
     public static void w() {
-        log(allowW,saveW,null,"",LOG_TYPE.W);
+        log(allowW, saveW, null, "", LOG_TYPE.W);
     }
 
     public static void wj(String json) {
-        wj(null,json);
+        wj(null, json);
     }
 
-    public static void wj(String tag,String json) {
-        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    public static void wj(String tag, String json) {
+        log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
     public static void wj(String json, String msg, Object... args) {
-        wj(null, formatJson(json,msg,args));
+        wj(null, formatJson(json, msg, args));
     }
 
     public static void wj(String tag, String json, String msg, Object... args) {
-        wj(tag, formatJson(json,msg,args));
+        wj(tag, formatJson(json, msg, args));
     }
 
     //============================E=======================
@@ -280,15 +284,15 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void e(Object msg) {
-        log(allowE,saveE,null,msg,LOG_TYPE.E);
+        log(allowE, saveE, null, msg, LOG_TYPE.E);
     }
 
     public static void ef(String msg, Object... args) {
-        log(allowE,saveE,null,format(msg, args),LOG_TYPE.E);
+        log(allowE, saveE, null, format(msg, args), LOG_TYPE.E);
     }
 
     public static void ef(Object... args) {
-        log(allowE,saveE,null,format(null, args),LOG_TYPE.E);
+        log(allowE, saveE, null, format(null, args), LOG_TYPE.E);
     }
 
     /**
@@ -297,31 +301,31 @@ public class Log {
      * @param msg The message you would like logged.
      */
     public static void e(String tag, Object msg) {
-        log(allowE,saveE,tag,msg,LOG_TYPE.E);
+        log(allowE, saveE, tag, msg, LOG_TYPE.E);
     }
 
     public static void e(String tag, String msg, Object... args) {
-        log(allowE,saveE,tag,String.format(msg, args),LOG_TYPE.E);
+        log(allowE, saveE, tag, String.format(msg, args), LOG_TYPE.E);
     }
 
     public static void e() {
-        log(allowE,saveE,null,"",LOG_TYPE.E);
+        log(allowE, saveE, null, "", LOG_TYPE.E);
     }
 
     public static void ej(String json) {
-        ej(null,json);
+        ej(null, json);
     }
 
-    public static void ej(String tag,String json) {
-        log(allowV,saveV,tag, formatJson(json),LOG_TYPE.V);
+    public static void ej(String tag, String json) {
+        log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
     public static void ej(String json, String msg, Object... args) {
-        ej(null, formatJson(json,msg,args));
+        ej(null, formatJson(json, msg, args));
     }
 
     public static void ej(String tag, String json, String msg, Object... args) {
-        ej(tag, formatJson(json,msg,args));
+        ej(tag, formatJson(json, msg, args));
     }
 
     /**
@@ -434,35 +438,35 @@ public class Log {
         return true;
     }
 
-    private static void log(boolean isAllow,boolean isSave, String tag, Object log, LOG_TYPE log_type) {
+    private static void log(boolean isAllow, boolean isSave, String tag, Object log, LOG_TYPE log_type) {
         String logMsg = buildMessage(ObjectToString(log), isSave);
-        if(logMsg == null) {
+        if (logMsg == null) {
             logMsg = "null";
         }
 
         if (tag == null) {
-            if(context == null){
+            if (context == null) {
                 tag = TAG;
-            }else{
+            } else {
                 tag = context.getPackageName();
             }
         }
 
-        if(isAllow && isPrint(logMsg)) {
-            logSplit(tag,logMsg,log_type);
+        if (isAllow && isPrint(logMsg)) {
+            logSplit(tag, logMsg, log_type);
         }
     }
 
-    private static void logSplit(String tag, String logMsg, LOG_TYPE log_type){
+    private static void logSplit(String tag, String logMsg, LOG_TYPE log_type) {
         final int logLen = logMsg.length();
         final int splitLen = 1024;
-        final int logcount = Integer.parseInt((Math.ceil((double)(logLen / splitLen)) + "").substring(0, (Math.ceil((double)(logLen / splitLen)) + "").indexOf(".")));
-        if(logLen > splitLen) {
-            for(int i = 0; i < logcount; ++i) {
-                if(i == logcount - 1) {
-                    logOriginal(tag, logMsg.substring(i * splitLen, logLen),log_type);
+        final int logcount = Integer.parseInt((Math.ceil((double) (logLen / splitLen)) + "").substring(0, (Math.ceil((double) (logLen / splitLen)) + "").indexOf(".")));
+        if (logLen > splitLen) {
+            for (int i = 0; i < logcount; ++i) {
+                if (i == logcount - 1) {
+                    logOriginal(tag, logMsg.substring(i * splitLen, logLen), log_type);
                 } else {
-                    logOriginal(tag, logMsg.substring(i * splitLen, (i + 1) * splitLen),log_type);
+                    logOriginal(tag, logMsg.substring(i * splitLen, (i + 1) * splitLen), log_type);
                 }
             }
         } else {
@@ -470,31 +474,26 @@ public class Log {
         }
     }
 
-    private static void logOriginal(String tag, String msg, LOG_TYPE log_type){
-        switch (log_type){
-            case V:
-            {
-                android.util.Log.v(tag,msg);
+    private static void logOriginal(String tag, String msg, LOG_TYPE log_type) {
+        switch (log_type) {
+            case V: {
+                android.util.Log.v(tag, msg);
                 break;
             }
-            case D:
-            {
-                android.util.Log.d(tag,msg);
+            case D: {
+                android.util.Log.d(tag, msg);
                 break;
             }
-            case I:
-            {
-                android.util.Log.i(tag,msg);
+            case I: {
+                android.util.Log.i(tag, msg);
                 break;
             }
-            case W:
-            {
-                android.util.Log.w(tag,msg);
+            case W: {
+                android.util.Log.w(tag, msg);
                 break;
             }
-            case E:
-            {
-                android.util.Log.e(tag,msg);
+            case E: {
+                android.util.Log.e(tag, msg);
                 break;
             }
         }
@@ -613,26 +612,34 @@ public class Log {
     }
 
     public static String ObjectToString(Object msg) {
-        return msg.toString();
+        if (msg != null) {
+            return msg.toString();
+        } else {
+            return "[null]";
+        }
     }
 
-    private static String formatJson(String json,String msg,Object... args){
-        return String.format(msg,args) + "\n" + StringUtils.format(StringUtils.convertUnicode(json));
+    private static String formatJson(String json, String msg, Object... args) {
+        return String.format(msg, args) + "\n" + StringUtils.format(StringUtils.convertUnicode(json));
     }
 
-    private static String formatJson(String json){
+    private static String formatJson(String json) {
         return StringUtils.format(StringUtils.convertUnicode(json));
     }
 
-    private static String format(String msg,Object... args){
-        if(msg == null) {
+    private static String format(String msg, Object... args) {
+        if (msg == null) {
             StringBuilder msgBuilder = new StringBuilder();
             for (Object obj : args) {
-                msgBuilder.append(obj.toString()).append(" ");
+                if (obj != null) {
+                    msgBuilder.append(obj.toString()).append(" ");
+                } else {
+                    msgBuilder.append("[null]").append(" ");
+                }
             }
             msg = msgBuilder.toString();
             return msg;
-        }else {
+        } else {
             return String.format(msg, args);
         }
     }

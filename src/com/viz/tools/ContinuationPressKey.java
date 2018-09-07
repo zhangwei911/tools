@@ -19,8 +19,16 @@ public class ContinuationPressKey {
      */
     public static boolean pressKey(int times) {
         Log.i("ContinuationPressKey","连续按键次数---> "+pressKey.getPressKeyTimes());
+        return pressKey(times,pressKey.time);
+    }
+
+    public static boolean pressKey(int times,int timeout){
+        pressKey.setTimeOut(timeout);
+        Log.i("ContinuationPressKey","连续按键次数---> "+pressKey.getPressKeyTimes());
         if (pressKey.getPressKeyTimes() == times) {
-            pressKey.addTimes();
+            Log.i("ContinuationPressKey","连续按键达到限制次数");
+            pressKey.presstimes = 1;
+            pressKey.start = true;
             return true;
         } else {
             pressKey.addTimes();
@@ -61,6 +69,10 @@ public class ContinuationPressKey {
 
         public void setPressKeyTimes(int presstimes) {
             this.presstimes = presstimes;
+        }
+
+        public void setTimeOut(int timeOut){
+            this.time = timeOut;
         }
     }
 }

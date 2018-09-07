@@ -48,7 +48,7 @@ public class Signature {
 
             Set<Map.Entry<String, String>> entrySet = map.entrySet();
             for (Map.Entry<String, String> entry : entrySet) {
-                Log.i("",String.format("%s=%s", entry.getKey(), entry.getValue()));
+                Log.i("", String.format("%s=%s", entry.getKey(), entry.getValue()));
             }
 
         } catch (Exception e) {
