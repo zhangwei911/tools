@@ -11,6 +11,12 @@
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application>
-        <service android:name=".LogService" android:exported="true" android:enabled="true"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+        <service
+            android:name=".LogService"
+            android:exported="true"
+            android:enabled="true"/>
     </application>
 </manifest>

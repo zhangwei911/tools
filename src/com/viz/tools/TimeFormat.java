@@ -1,10 +1,11 @@
 package com.viz.tools;
 
+import android.text.TextUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-import android.text.TextUtils;
 
 /**
  * Created by viz on 2014/11/25.
