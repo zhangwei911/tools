@@ -659,7 +659,7 @@ public class Log {
     }
 
     public static String ObjectToString(Object msg) {
-        return msg.toString();
+        return msg != null ? msg.toString() : "[null]";
     }
 
     private static String formatJson(String json, String msg, Object... args) {
@@ -674,7 +674,11 @@ public class Log {
         if (msg == null) {
             StringBuilder msgBuilder = new StringBuilder();
             for (Object obj : args) {
-                msgBuilder.append(obj.toString()).append(" ");
+                if (obj != null) {
+                    msgBuilder.append(obj.toString()).append(" ");
+                } else {
+                    msgBuilder.append("[null]").append(" ");
+                }
             }
             msg = msgBuilder.toString();
             return msg;
