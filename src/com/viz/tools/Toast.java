@@ -1,6 +1,5 @@
 package com.viz.tools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -175,7 +174,7 @@ public class Toast {
      * @param rid     Toast提示内容资源id
      */
     public static void show(Context context, int rid) {
-        show((Activity) context, context.getString(rid));
+        show(context, context.getString(rid));
     }
 
     public static void showShort(int rid) {
