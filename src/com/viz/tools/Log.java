@@ -79,7 +79,7 @@ public class Log {
         log(allowV, saveV, null, msg, LOG_TYPE.V);
     }
 
-    public static void vf(String msg, Object... args) {
+    public static void vff(String msg, Object... args) {
         log(allowV, saveV, null, format(msg, args), LOG_TYPE.V);
     }
 
@@ -96,7 +96,7 @@ public class Log {
         log(allowV, saveV, tag, msg, LOG_TYPE.V);
     }
 
-    public static void vf(String tag, String msg, Object... args) {
+    public static void vft(String tag, String msg, Object... args) {
         if (args.length == 0) {
             v(tag, msg);
             return;
@@ -120,11 +120,11 @@ public class Log {
         log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
-    public static void vj(String json, String msg, Object... args) {
+    public static void vjf(String json, String msg, Object... args) {
         vj(null, formatJson(json, msg, args));
     }
 
-    public static void vj(String tag, String json, String msg, Object... args) {
+    public static void vjt(String tag, String json, String msg, Object... args) {
         vj(tag, formatJson(json, msg, args));
     }
 
@@ -139,7 +139,7 @@ public class Log {
         log(allowD, saveD, null, msg, LOG_TYPE.D);
     }
 
-    public static void df(String msg, Object... args) {
+    public static void dff(String msg, Object... args) {
         log(allowD, saveD, null, format(msg, args), LOG_TYPE.D);
     }
 
@@ -156,7 +156,7 @@ public class Log {
         log(allowD, saveD, tag, msg, LOG_TYPE.D);
     }
 
-    public static void df(String tag, String msg, Object... args) {
+    public static void dft(String tag, String msg, Object... args) {
         if (args.length == 0) {
             d(tag, msg);
             return;
@@ -180,11 +180,11 @@ public class Log {
         log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
-    public static void dj(String json, String msg, Object... args) {
+    public static void djf(String json, String msg, Object... args) {
         dj(null, formatJson(json, msg, args));
     }
 
-    public static void dj(String tag, String json, String msg, Object... args) {
+    public static void djt(String tag, String json, String msg, Object... args) {
         dj(tag, formatJson(json, msg, args));
     }
 
@@ -199,7 +199,7 @@ public class Log {
         log(allowI, saveI, null, msg, LOG_TYPE.I);
     }
 
-    public static void ifo(String msg, Object... args) {
+    public static void ifof(String msg, Object... args) {
         log(allowI, saveI, null, format(msg, args), LOG_TYPE.I);
     }
 
@@ -216,7 +216,7 @@ public class Log {
         log(allowI, saveI, tag, msg, LOG_TYPE.I);
     }
 
-    public static void ifo(String tag, String msg, Object... args) {
+    public static void ifot(String tag, String msg, Object... args) {
         if (args.length == 0) {
             i(tag, msg);
             return;
@@ -240,11 +240,11 @@ public class Log {
         log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
-    public static void ij(String json, String msg, Object... args) {
+    public static void ijf(String json, String msg, Object... args) {
         ij(null, formatJson(json, msg, args));
     }
 
-    public static void ij(String tag, String json, String msg, Object... args) {
+    public static void ijt(String tag, String json, String msg, Object... args) {
         ij(tag, formatJson(json, msg, args));
     }
 
@@ -259,7 +259,7 @@ public class Log {
         log(allowW, saveW, null, msg, LOG_TYPE.W);
     }
 
-    public static void wf(String msg, Object... args) {
+    public static void wff(String msg, Object... args) {
         log(allowW, saveW, null, format(msg, args), LOG_TYPE.W);
     }
 
@@ -276,7 +276,7 @@ public class Log {
         log(allowW, saveW, tag, msg, LOG_TYPE.W);
     }
 
-    public static void wf(String tag, String msg, Object... args) {
+    public static void wft(String tag, String msg, Object... args) {
         if (args.length == 0) {
             w(tag, msg);
             return;
@@ -300,11 +300,11 @@ public class Log {
         log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
-    public static void wj(String json, String msg, Object... args) {
+    public static void wjf(String json, String msg, Object... args) {
         wj(null, formatJson(json, msg, args));
     }
 
-    public static void wj(String tag, String json, String msg, Object... args) {
+    public static void wjt(String tag, String json, String msg, Object... args) {
         wj(tag, formatJson(json, msg, args));
     }
 
@@ -319,7 +319,7 @@ public class Log {
         log(allowE, saveE, null, msg, LOG_TYPE.E);
     }
 
-    public static void ef(String msg, Object... args) {
+    public static void eff(String msg, Object... args) {
         log(allowE, saveE, null, format(msg, args), LOG_TYPE.E);
     }
 
@@ -336,7 +336,7 @@ public class Log {
         log(allowE, saveE, tag, msg, LOG_TYPE.E);
     }
 
-    public static void ef(String tag, String msg, Object... args) {
+    public static void eft(String tag, String msg, Object... args) {
         if (args.length == 0) {
             e(tag, msg);
             return;
@@ -360,11 +360,11 @@ public class Log {
         log(allowV, saveV, tag, formatJson(json), LOG_TYPE.V);
     }
 
-    public static void ej(String json, String msg, Object... args) {
+    public static void ejf(String json, String msg, Object... args) {
         ej(null, formatJson(json, msg, args));
     }
 
-    public static void ej(String tag, String json, String msg, Object... args) {
+    public static void ejt(String tag, String json, String msg, Object... args) {
         ej(tag, formatJson(json, msg, args));
     }
 
