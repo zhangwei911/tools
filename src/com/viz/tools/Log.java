@@ -702,7 +702,7 @@ public class Log {
         if (startTimeMap.containsKey(tag)) {
             long endTime = System.currentTimeMillis();
             long startTime = startTimeMap.get(tag);
-            df("耗时:%dms[%s]", endTime - startTime, tag);
+            dff("耗时:%dms[%s]", endTime - startTime, tag);
             startTimeMap.remove(tag);
         }
     }
