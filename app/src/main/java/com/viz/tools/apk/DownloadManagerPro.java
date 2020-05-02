@@ -265,7 +265,7 @@ public class DownloadManagerPro {
         return getInt(downloadId, DownloadManager.COLUMN_REASON);
     }
 
-    public static class RequestPro extends DownloadManager.Request {
+    public static class RequestPro extends Request {
 
         public static final String METHOD_NAME_SET_NOTI_CLASS  = "setNotiClass";
         public static final String METHOD_NAME_SET_NOTI_EXTRAS = "setNotiExtras";

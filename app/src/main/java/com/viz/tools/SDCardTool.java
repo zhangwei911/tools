@@ -12,6 +12,6 @@ public class SDCardTool {
      * @return true存在，false不存在
      */
     public static boolean isExistSDCard() {
-        return Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 }
