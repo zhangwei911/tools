@@ -17,7 +17,6 @@ package com.viz.tools;
 
 import android.content.Context;
 import android.os.Environment;
-import android.text.TextUtils;
 
 import com.viz.tools.apk.StringUtils;
 

@@ -1,10 +1,9 @@
 package com.viz.tools;
 
-import android.text.TextUtils;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -20,19 +19,22 @@ public class TimeFormat {
      * @param dateTime       格式化时间字符串
      * @param dateTimeFormat 时间格式
      * @return 毫秒数
-     * @throws ParseException
      */
-    public static long getMS(String dateTime, String dateTimeFormat) throws ParseException {
+    public static long getMS(String dateTime, String dateTimeFormat) {
         return getMS(dateTime, dateTimeFormat, null);
     }
 
-    public static long getMS(String dateTime, String dateTimeFormat, String timeZone) throws ParseException {
-        Calendar c = Calendar.getInstance();
+    public static long getMS(String dateTime, String dateTimeFormat, String timeZone) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
-        TimeZone tz = TextUtils.isEmpty(timeZone) ? TimeZone.getDefault() : TimeZone.getTimeZone(timeZone);
-        simpleDateFormat.setTimeZone(tz);
-        c.setTime(simpleDateFormat.parse(dateTime));
-        return c.getTimeInMillis();
+        try {
+            Calendar c = Calendar.getInstance();
+            TimeZone tz = TextUtils.isEmpty(timeZone) ? TimeZone.getDefault() : TimeZone.getTimeZone(timeZone);
+            simpleDateFormat.setTimeZone(tz);
+            c.setTime(simpleDateFormat.parse(dateTime));
+            return c.getTimeInMillis();
+        } catch (Exception e) {
+            return new Date(dateTime).getTime();
+        }
     }
 
     /**
@@ -50,11 +52,11 @@ public class TimeFormat {
         SimpleDateFormat sdf = new SimpleDateFormat(dateTimeFormat);
         TimeZone tz = TextUtils.isEmpty(timeZone) ? TimeZone.getDefault() : TimeZone.getTimeZone(timeZone);
         sdf.setTimeZone(tz);
-        if(msTime instanceof Long){
+        if (msTime instanceof Long) {
             return sdf.format(msTime);
-        }else if(msTime instanceof String){
+        } else if (msTime instanceof String) {
             return sdf.format(Long.parseLong(msTime.toString()));
-        }else{
+        } else {
             try {
                 throw new Exception(msTime.getClass().getName());
             } catch (Exception e) {
@@ -73,37 +75,27 @@ public class TimeFormat {
      * @return
      */
     public static String changeFormat(String dateTime, String originFormat, String newFormat) {
-        try {
-            return getDateFormatTime(getMS(dateTime, originFormat) + "", newFormat);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return dateTime;
-        }
+        return getDateFormatTime(getMS(dateTime, originFormat) + "", newFormat);
     }
 
     public static String changeFormat(String dateTime, String originFormat, String newFormat, String oldTimeZone, String newTimeZone) {
-        try {
-            return getDateFormatTime(getMS(dateTime, originFormat, oldTimeZone) + "", newFormat, newTimeZone);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return dateTime;
-        }
+        return getDateFormatTime(getMS(dateTime, originFormat, oldTimeZone) + "", newFormat, newTimeZone);
     }
 
-    public static String getCurrentTime(){
-        return getDateFormatTime(System.currentTimeMillis()+"",TIMEFORAMT);
+    public static String getCurrentTime() {
+        return getDateFormatTime(System.currentTimeMillis() + "", TIMEFORAMT);
     }
 
-    public static String getCurrentTime(String timeFormat){
-        return getDateFormatTime(System.currentTimeMillis()+"",timeFormat);
+    public static String getCurrentTime(String timeFormat) {
+        return getDateFormatTime(System.currentTimeMillis() + "", timeFormat);
     }
 
-    public static String getCurrentTimeTimeZone(String timeFormat,String timeZone){
-        return getDateFormatTime(System.currentTimeMillis()+"",timeFormat,timeZone);
+    public static String getCurrentTimeTimeZone(String timeFormat, String timeZone) {
+        return getDateFormatTime(System.currentTimeMillis() + "", timeFormat, timeZone);
     }
 
-    public static String getCurrentTimeTimeZone(String timeZone){
-        return getDateFormatTime(System.currentTimeMillis()+"",TIMEFORAMT,timeZone);
+    public static String getCurrentTimeTimeZone(String timeZone) {
+        return getDateFormatTime(System.currentTimeMillis() + "", TIMEFORAMT, timeZone);
     }
 
     public static void main(String[] args) {
