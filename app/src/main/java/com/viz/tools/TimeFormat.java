@@ -33,7 +33,12 @@ public class TimeFormat {
             c.setTime(simpleDateFormat.parse(dateTime));
             return c.getTimeInMillis();
         } catch (Exception e) {
-            return new Date(dateTime).getTime();
+            try {
+                return new Date(dateTime).getTime();
+            } catch (Exception e1) {
+                l.e(e1.getMessage());
+                return 0L;
+            }
         }
     }
 
