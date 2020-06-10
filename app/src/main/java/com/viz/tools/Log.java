@@ -70,8 +70,8 @@ public class Log {
 
     private static LogListener logListener = null;
 
-    public void setLogListener(LogListener logListener) {
-        this.logListener = logListener;
+    public static void setLogListener(LogListener logListener) {
+        Log.logListener = logListener;
     }
 
     public static void init(Context context) {
