@@ -61,7 +61,17 @@ public class Log {
 
     private static Map<String, Long> startTimeMap = new HashMap<String, Long>();
 
+    interface LogListener {
+        public void log(String tag, String msg, LOG_TYPE log_type, Exception e);
+    }
+
     public Log() {
+    }
+
+    private static LogListener logListener = null;
+
+    public void setLogListener(LogListener logListener) {
+        this.logListener = logListener;
     }
 
     public static void init(Context context) {
@@ -518,6 +528,9 @@ public class Log {
     }
 
     private static void logOriginal(String tag, String msg, LOG_TYPE log_type, Exception e) {
+        if (logListener != null) {
+            logListener.log(tag, msg, log_type, e);
+        }
         switch (log_type) {
             case V: {
                 android.util.Log.v(tag, msg, e);
@@ -588,7 +601,7 @@ public class Log {
             }
 
             // 得到当前日期时间的指定格式字符串
-            String strDateTimeFileName = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            String strDateTimeFileName = new SimpleDateFormat("yyyyMMddHH").format(new Date());
 
             File fileLogFilePath = new File(m_strLogFolderPath, strDateTimeFileName + (context == null ? "" : context.getPackageName()) + ".log");
             // 如果日志文件不存在，则创建它
