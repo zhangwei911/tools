@@ -61,8 +61,8 @@ public class Log {
 
     private static Map<String, Long> startTimeMap = new HashMap<String, Long>();
 
-    interface LogListener {
-        public void log(String tag, String msg, LOG_TYPE log_type, Exception e);
+    public interface LogListener {
+        void log(String tag, String msg, LOG_TYPE log_type, Exception e);
     }
 
     public Log() {
