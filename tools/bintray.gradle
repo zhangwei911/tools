@@ -38,7 +38,6 @@ bintray {
     configurations = ['archives']
 }
 
-
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
